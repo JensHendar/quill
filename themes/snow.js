@@ -13,6 +13,8 @@ const TOOLBAR_CONFIG = [
   ['clean']
 ];
 
+const NO_LOCAL_URLS = true;
+
 class SnowTheme extends BaseTheme {
   constructor(quill, options) {
     if (options.modules.toolbar != null && options.modules.toolbar.container == null) {
@@ -45,7 +47,7 @@ SnowTheme.DEFAULTS = extend(true, {}, BaseTheme.DEFAULTS, {
             let preview = this.quill.getText(range);
             if (/^\S+@\S+\.\S+$/.test(preview) && preview.indexOf('mailto:') !== 0) {
               preview = 'mailto:' + preview;
-            } else if (preview.indexOf('http://') !== 0 && preview.indexOf('https://') !== 0) {
+            } else if (NO_LOCAL_URLS && preview.indexOf('http://') !== 0 && preview.indexOf('https://') !== 0) {
               preview = 'http://' + preview;
             }
             let tooltip = this.quill.theme.tooltip;
